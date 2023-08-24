@@ -184,7 +184,7 @@ resource "yandex_compute_instance" "grafanamonitor"{
   metadata = {
     user-data = "${file("./meta.txt")}"
   } 
-    provisioner "remote-exec" {
+  provisioner "remote-exec" {
     inline = [
       "apt-get -qq install python -y",
     ]
@@ -232,6 +232,28 @@ resource "yandex_compute_instance" "elastic"{
   metadata = {
     user-data = "${file("./meta.txt")}"
   }
+  provisioner "remote-exec" {
+    inline = [
+      "apt-get -qq install python -y",
+    ]
+
+    connection {
+      host        = "${self.ipv4_address}"
+      type        = "ssh"
+      user        = "root"
+      private_key = "${file("./meta.txt")}"
+    }
+  }
+
+  provisioner "local-exec" {
+    environment {
+      PUBLIC_IP  = "${self.ipv4_address}"
+      PRIVATE_IP = "${self.ipv4_address_private}"
+    }
+
+    working_dir = "../Ansible/"
+    command     = "ansible-playbook -u root --private-key ${var.ssh_key_private} elastik.yml -i ${self.ipv4_address},"
+  }
 }
 
 
@@ -258,6 +280,28 @@ resource "yandex_compute_instance" "kibana"{
   }
   metadata = {
     user-data = "${file("./meta.txt")}"
+  }
+  provisioner "remote-exec" {
+    inline = [
+      "apt-get -qq install python -y",
+    ]
+
+    connection {
+      host        = "${self.ipv4_address}"
+      type        = "ssh"
+      user        = "root"
+      private_key = "${file("./meta.txt")}"
+    }
+  }
+
+  provisioner "local-exec" {
+    environment {
+      PUBLIC_IP  = "${self.ipv4_address}"
+      PRIVATE_IP = "${self.ipv4_address_private}"
+    }
+
+    working_dir = "../Ansible/"
+    command     = "ansible-playbook -u root --private-key ${var.ssh_key_private} kibana.yml -i ${self.ipv4_address},"
   }
 }
 
