@@ -37,7 +37,7 @@ resource "yandex_vpc_subnet" "subnet2" {
 }
 
 #=======================
-#Создание vm1, vm2
+#Создание виртуальных машин
 
 resource "yandex_compute_instance" "nginxserver1" {
   name = "nginxserver1"
@@ -62,6 +62,28 @@ resource "yandex_compute_instance" "nginxserver1" {
   }
   metadata = {
     user-data = "${file("./meta.txt")}"
+  }
+  provisioner "remote-exec" {
+    inline = [
+      "apt-get -qq install python -y",
+    ]
+
+    connection {
+      host        = "${self.ipv4_address}"
+      type        = "ssh"
+      user        = "root"
+      private_key = "${file('~/.ssh/id_rsa')}"
+    }
+  }
+
+  provisioner "local-exec" {
+    environment {
+      PUBLIC_IP  = "${self.ipv4_address}"
+      PRIVATE_IP = "${self.ipv4_address_private}"
+    }
+
+    working_dir = "../Ansible/"
+    command     = "ansible-playbook -u root --private-key ${var.ssh_key_private} playbook.yml -i ${self.ipv4_address},"
   }
 }
 
