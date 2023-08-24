@@ -72,7 +72,7 @@ resource "yandex_compute_instance" "nginxserver1" {
       host        = "${self.ipv4_address}"
       type        = "ssh"
       user        = "root"
-      private_key = "${file('~/.ssh/id_rsa')}"
+      private_key = "${file("./meta.txt")}"
     }
   }
 
