@@ -12,4 +12,5 @@
 
   tasks:
   - name: install grafana
-    apt: /home/user/grafana_10.1.0_amd64.deb
+    ansible.builtin.apt:
+      deb: /home/user/grafana_10.1.0_amd64.deb

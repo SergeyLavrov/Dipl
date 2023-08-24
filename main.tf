@@ -83,7 +83,7 @@ resource "yandex_compute_instance" "nginxserver1" {
     }
 
     working_dir = "../Ansible/"
-    command     = "ansible-playbook -u root --private-key ${var.ssh_key_private} playbook.yml -i ${self.ipv4_address},"
+    command     = "ansible-playbook -u root --private-key ${var.ssh_key_private} nginx.yml -i ${self.ipv4_address},"
   }
 }
 
@@ -110,6 +110,28 @@ resource "yandex_compute_instance" "nginxserver2" {
   }
   metadata = {
     user-data = "${file("./meta.txt")}"
+  }
+    provisioner "remote-exec" {
+    inline = [
+      "apt-get -qq install python -y",
+    ]
+
+    connection {
+      host        = "${self.ipv4_address}"
+      type        = "ssh"
+      user        = "root"
+      private_key = "${file("./meta.txt")}"
+    }
+  }
+
+  provisioner "local-exec" {
+    environment {
+      PUBLIC_IP  = "${self.ipv4_address}"
+      PRIVATE_IP = "${self.ipv4_address_private}"
+    }
+
+    working_dir = "../Ansible/"
+    command     = "ansible-playbook -u root --private-key ${var.ssh_key_private} nginx.yml -i ${self.ipv4_address},"
   }
 }
 
@@ -161,7 +183,29 @@ resource "yandex_compute_instance" "grafanamonitor"{
   }
   metadata = {
     user-data = "${file("./meta.txt")}"
-  }  
+  } 
+    provisioner "remote-exec" {
+    inline = [
+      "apt-get -qq install python -y",
+    ]
+
+    connection {
+      host        = "${self.ipv4_address}"
+      type        = "ssh"
+      user        = "root"
+      private_key = "${file("./meta.txt")}"
+    }
+  }
+
+  provisioner "local-exec" {
+    environment {
+      PUBLIC_IP  = "${self.ipv4_address}"
+      PRIVATE_IP = "${self.ipv4_address_private}"
+    }
+
+    working_dir = "../Ansible/"
+    command     = "ansible-playbook -u root --private-key ${var.ssh_key_private} grafana.yml -i ${self.ipv4_address},"
+  } 
 }
 
 resource "yandex_compute_instance" "elastic"{
