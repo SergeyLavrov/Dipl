@@ -29,6 +29,7 @@ resource "yandex_vpc_subnet" "subnet1" {
   network_id = yandex_vpc_network.network1.id
   v4_cidr_blocks = ["10.0.1.0/24"]
 }
+
 resource "yandex_vpc_subnet" "subnet2" {
   name = "subnet2"
   zone = "ru-central1-b"
@@ -44,6 +45,10 @@ resource "yandex_vpc_subnet" "subnet2" {
 resource "yandex_compute_instance" "nginxserver1" {
   name = "nginxserver1"
   zone = "ru-central1-a"
+
+scheduling_policy {
+    preemptible = true
+  }
   
   resources{
     cores = 2
@@ -92,7 +97,11 @@ resource "yandex_compute_instance" "nginxserver1" {
 resource "yandex_compute_instance" "nginxserver2" {
   name = "nginxserver2"
   zone = "ru-central1-b"
-  
+
+scheduling_policy {
+    preemptible = true
+  }
+
   resources{
     cores = 2
     core_fraction = 20
@@ -140,6 +149,11 @@ resource "yandex_compute_instance" "nginxserver2" {
 resource "yandex_compute_instance" "promethmonitor"{
   name = "promethmonitor"
   zone = "ru-central1-a"
+
+scheduling_policy {
+    preemptible = true
+  }
+
   resources{
     cores = 4
     core_fraction = 20
@@ -166,6 +180,11 @@ resource "yandex_compute_instance" "promethmonitor"{
 resource "yandex_compute_instance" "grafanamonitor"{
   name = "grafanamonitor"
   zone = "ru-central1-a"
+
+scheduling_policy {
+    preemptible = true
+  }
+
   resources{
   cores = 4
   core_fraction = 20
@@ -213,7 +232,11 @@ resource "yandex_compute_instance" "grafanamonitor"{
 resource "yandex_compute_instance" "elastic"{
   name = "elastic"
   zone = "ru-central1-a"
-  
+
+scheduling_policy {
+    preemptible = true
+  }
+
   resources{
     cores = 4
     core_fraction = 20
@@ -262,6 +285,10 @@ resource "yandex_compute_instance" "elastic"{
 resource "yandex_compute_instance" "kibana"{
   name = "kibana"
   zone = "ru-central1-a"
+
+scheduling_policy {
+    preemptible = true
+  }
   
   resources{
     cores = 4
