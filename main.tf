@@ -37,6 +37,8 @@ resource "yandex_vpc_subnet" "subnet2" {
 }
 
 #=======================
+
+
 #Создание виртуальных машин
 
 resource "yandex_compute_instance" "nginxserver1" {
