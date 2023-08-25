@@ -10,8 +10,8 @@
 
   - name: Change web site
     ansible.builtin.copy:
-      src: ../web_site/index.nginx-debian.html
-      dest: /var/www/html/index.nginx-debian.html
+      src: ../site/index.html
+      dest: /var/www/html/index.html
       owner: user
       group: user
       mode: '0644'
