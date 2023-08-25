@@ -73,7 +73,7 @@ resource "yandex_compute_instance" "nginxserver1" {
     connection {
       host        = "${self.ipv4_address}"
       type        = "ssh"
-      user        = "root"
+      user        = "sergey"
       private_key = "${file("./meta.txt")}"
     }
   }
@@ -85,7 +85,7 @@ resource "yandex_compute_instance" "nginxserver1" {
     }
 
     working_dir = "../Ansible/"
-    command     = "ansible-playbook -u root --private-key ${var.ssh_key_private} nginx.yml -i ${self.ipv4_address},"
+    command     = "ansible-playbook -u sergey --private-key ${var.ssh_key_private} nginx.yml -i ${self.ipv4_address},"
   }
 }
 
@@ -121,7 +121,7 @@ resource "yandex_compute_instance" "nginxserver2" {
     connection {
       host        = "${self.ipv4_address}"
       type        = "ssh"
-      user        = "root"
+      user        = "sergey"
       private_key = "${file("./meta.txt")}"
     }
   }
@@ -133,7 +133,7 @@ resource "yandex_compute_instance" "nginxserver2" {
     }
 
     working_dir = "../Ansible/"
-    command     = "ansible-playbook -u root --private-key ${var.ssh_key_private} nginx.yml -i ${self.ipv4_address},"
+    command     = "ansible-playbook -u sergey --private-key ${var.ssh_key_private} nginx.yml -i ${self.ipv4_address},"
   }
 }
 
@@ -194,7 +194,7 @@ resource "yandex_compute_instance" "grafanamonitor"{
     connection {
       host        = "${self.ipv4_address}"
       type        = "ssh"
-      user        = "root"
+      user        = "sergey"
       private_key = "${file("./meta.txt")}"
     }
   }
@@ -206,7 +206,7 @@ resource "yandex_compute_instance" "grafanamonitor"{
     }
 
     working_dir = "../Ansible/"
-    command     = "ansible-playbook -u root --private-key ${var.ssh_key_private} grafana.yml -i ${self.ipv4_address},"
+    command     = "ansible-playbook -u sergey --private-key ${var.ssh_key_private} grafana.yml -i ${self.ipv4_address},"
   } 
 }
 
@@ -242,7 +242,7 @@ resource "yandex_compute_instance" "elastic"{
     connection {
       host        = "${self.ipv4_address}"
       type        = "ssh"
-      user        = "root"
+      user        = "sergey"
       private_key = "${file("./meta.txt")}"
     }
   }
@@ -254,7 +254,7 @@ resource "yandex_compute_instance" "elastic"{
     }
 
     working_dir = "../Ansible/"
-    command     = "ansible-playbook -u root --private-key ${var.ssh_key_private} elastik.yml -i ${self.ipv4_address},"
+    command     = "ansible-playbook -u sergey --private-key ${var.ssh_key_private} elastik.yml -i ${self.ipv4_address},"
   }
 }
 
@@ -291,7 +291,7 @@ resource "yandex_compute_instance" "kibana"{
     connection {
       host        = "${self.ipv4_address}"
       type        = "ssh"
-      user        = "root"
+      user        = "sergey"
       private_key = "${file("./meta.txt")}"
     }
   }
@@ -303,7 +303,7 @@ resource "yandex_compute_instance" "kibana"{
     }
 
     working_dir = "../Ansible/"
-    command     = "ansible-playbook -u root --private-key ${var.ssh_key_private} kibana.yml -i ${self.ipv4_address},"
+    command     = "ansible-playbook -u sergey --private-key ${var.ssh_key_private} kibana.yml -i ${self.ipv4_address},"
   }
 }
 
