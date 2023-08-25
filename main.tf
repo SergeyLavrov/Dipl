@@ -53,7 +53,7 @@ resource "yandex_compute_instance" "nginxserver1" {
 
   boot_disk{
     initialize_params {
-      image_id = "fd8o41nbel1uqngk0op2"
+      image_id = var.image_id
       size = 10
       description = "boot disk for nginx_server1"
     }
@@ -101,7 +101,7 @@ resource "yandex_compute_instance" "nginxserver2" {
 
   boot_disk{
     initialize_params {
-      image_id = "fd8o41nbel1uqngk0op2"
+      image_id = var.image_id
       size = 10
       description = "boot disk for nginx_server1"
     }
@@ -148,7 +148,7 @@ resource "yandex_compute_instance" "promethmonitor"{
 
   boot_disk{
     initialize_params {
-      image_id = "fd8o41nbel1uqngk0op2"
+      image_id = var.image_id
       size = 10
       description = "boot disk for promethmonitor"
     }
@@ -174,7 +174,7 @@ resource "yandex_compute_instance" "grafanamonitor"{
   
   boot_disk{
     initialize_params {
-    image_id =  "fd8o41nbel1uqngk0op2"
+    image_id =  var.image_id
     size = 10
     description = "boot disk for grafanamonitor"
     }
@@ -222,7 +222,7 @@ resource "yandex_compute_instance" "elastic"{
 
   boot_disk{
     initialize_params {
-      image_id = "fd8o41nbel1uqngk0op2"
+      image_id = var.image_id
       size = 20
       description = "boot disk for elastic"
     }
@@ -271,7 +271,7 @@ resource "yandex_compute_instance" "kibana"{
 
   boot_disk{
     initialize_params {
-      image_id = "fd8o41nbel1uqngk0op2"
+      image_id = var.image_id
       size = 20
       description = "boot disk for kibana"
     }
