@@ -1,14 +1,14 @@
 variable yc_token {
-    default = ["y0_AgAAAAAA8tspAATuwQAAAADZMhvsDVu_bcH6RI-7RtcDsiBLc12RB1U"]
+    default = [""]
 }
 variable yc_cloud_id {
-    default = ["b1g2u10op2uhnaaf7fgr"]
+    default = [""]
 }
 variable yc_folder_id {
-    default = ["b1g8fp48t1jtns3b6rvb"]
+    default = [""]
 }
 variable image_id {
-    default = ["fd8fco5lpqbhanbfg2du"]  
+    default = [""]  
 }
 variable yc_public_key {}
 variable yc_private_key {}
