@@ -33,7 +33,7 @@
 
   - name: Copy config file for kibana
     copy:
-      src: ../elasticsearch_files/kibana.yml
+      src: ../elk/kibana.yml
       dest: /etc/kibana
       mode: 0644
       owner: root
