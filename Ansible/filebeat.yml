@@ -33,7 +33,7 @@
 
   - name: Copy config file for filebeat
     copy:
-      src: ../elasticsearch_files/filebeat.yml
+      src: ../elk/filebeat.yml
       dest: /etc/filebeat
       mode: 0600
       owner: root
