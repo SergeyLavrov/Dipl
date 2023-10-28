@@ -56,3 +56,36 @@ scheduling_policy {
 }
 ```
 
+в данном куске кода описано какие ресурсы должна создать Terraform на облаке Яндекса, а так же что должно произойти после разворачивания инфраструктуры, в частности в ниже приведённом куске кода описано что после развёртывания должен запускается Ansible и выполнять копирования конфигураций сервисов.\
+
+```
+  provisioner "remote-exec" {
+    inline = [
+      "apt-get -qq install python -y",
+    ]
+
+    connection {
+      host        = "${self.ipv4_address}"
+      type        = "ssh"
+      user        = "sergey"
+      private_key = "${file("./meta.txt")}"
+    }
+  }
+
+  provisioner "local-exec" {
+    environment {
+      PUBLIC_IP  = "${self.ipv4_address}"
+      PRIVATE_IP = "${self.ipv4_address_private}"
+    }
+
+    working_dir = "../Ansible/"
+    command     = "ansible-playbook -u sergey --private-key ${var.ssh_key_private} nginx.yml -i ${self.ipv4_address},"
+  }
+```
+
+Все переменные вынесены в отдельный файл 
+
+
+
+
+
